@@ -14,9 +14,10 @@
 
 use clap::Clap;
 use log::info;
-
 use git_version::git_version;
+
 const GIT_VERSION: &str = git_version!(args = ["--tags", "--always", "--dirty=-modified"], fallback = "unknown");
+const GIT_HOMEPAGE: &str = "https://github.com/rink1969/cita_ng_template";
 
 /// This doc string acts as a help message when the user runs '--help'
 /// as do all doc strings on fields
@@ -34,9 +35,9 @@ struct Opts {
 
 #[derive(Clap)]
 enum SubCommand {
-    /// print version information from git
-    #[clap(name = "gversion")]
-    GitVersion,
+    /// print information from git
+    #[clap(name = "git")]
+    GitInfo,
     /// A help message for the Test subcommand
     #[clap(name = "test", version = "1.3", author = "Someone Else")]
     Test(Test),
@@ -67,8 +68,9 @@ fn main() {
     // You can handle information about subcommands by requesting their matches by name
     // (as below), requesting just the name used, or both at the same time
     match opts.subcmd {
-        SubCommand::GitVersion => {
+        SubCommand::GitInfo => {
             println!("git version: {}", GIT_VERSION);
+            println!("homepage: {}", GIT_HOMEPAGE);
             std::process::exit(0);
         },
         SubCommand::Test(t) => {
