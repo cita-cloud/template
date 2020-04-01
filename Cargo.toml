@@ -11,3 +11,4 @@ edition = "2018"
 log = "*"
 log4rs = "*"
 clap = { git = "https://github.com/clap-rs/clap/" }
+git-version = "*"

@@ -15,6 +15,9 @@
 use clap::Clap;
 use log::info;
 
+use git_version::git_version;
+const GIT_VERSION: &str = git_version!(args = ["--tags", "--always", "--dirty=-modified"], fallback = "unknown");
+
 /// This doc string acts as a help message when the user runs '--help'
 /// as do all doc strings on fields
 #[derive(Clap)]
@@ -31,6 +34,9 @@ struct Opts {
 
 #[derive(Clap)]
 enum SubCommand {
+    /// print version information from git
+    #[clap(name = "gversion")]
+    GitVersion,
     /// A help message for the Test subcommand
     #[clap(name = "test", version = "1.3", author = "Someone Else")]
     Test(Test),
@@ -61,6 +67,10 @@ fn main() {
     // You can handle information about subcommands by requesting their matches by name
     // (as below), requesting just the name used, or both at the same time
     match opts.subcmd {
+        SubCommand::GitVersion => {
+            println!("git version: {}", GIT_VERSION);
+            std::process::exit(0);
+        },
         SubCommand::Test(t) => {
             if t.debug {
                 println!("Printing debug info...");
@@ -71,4 +81,5 @@ fn main() {
     }
 
     // more program logic goes here...
+    println!("...");
 }
