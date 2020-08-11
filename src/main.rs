@@ -20,7 +20,7 @@ const GIT_VERSION: &str = git_version!(
     args = ["--tags", "--always", "--dirty=-modified"],
     fallback = "unknown"
 );
-const GIT_HOMEPAGE: &str = "https://github.com/rink1969/cita_ng_template";
+const GIT_HOMEPAGE: &str = "https://github.com/cita-cloud/template";
 
 /// This doc string acts as a help message when the user runs '--help'
 /// as do all doc strings on fields
@@ -45,7 +45,7 @@ enum SubCommand {
 #[derive(Clap)]
 struct RunOpts {
     /// Sets a custom config file. Could have been an Option<T> with no default too
-    #[clap(short = "c", long = "config", default_value = "default.conf")]
+    #[clap(short = 'c', long = "config", default_value = "default.conf")]
     config: String,
     /// Some input. Because this isn't an Option<T> it's required to be used
     input: String,

@@ -1,5 +1,5 @@
 [package]
-name = "cita_ng_template"
+name = "template"
 version = "0.1.0"
 authors = ["Rivtower Technologies <contact@rivtower.com>"]
 license = "Apache-2.0"
